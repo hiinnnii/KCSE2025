@@ -20,6 +20,7 @@ Stable Diffusion and GAN-Based Hybrid Framework for Gray-scale Image Recovery
 데이콘(Dacon)에서 진행된 대회인 "이미지 색상화 및 손실 부분 복원 인공지능 경진대회"에서 제공한 데이터 셋 활용
 Train set (29604장), Test set (100)장에 대해 Mask 추출 *Test set은 정답 데이터 미제공으로 인해 직접 Mask 지정
 학습 셋을 8:2 비율로 나누어 실험 진행
+
 <img width="677" alt="image" src="https://github.com/user-attachments/assets/29eaa4f9-f4bb-423f-9bb9-903db78aab88" />
 
 ## Flow Chart
@@ -29,23 +30,52 @@ Train set (29604장), Test set (100)장에 대해 Mask 추출 *Test set은 정�
 ## Stable Diffusion 기반 이미지 복원
 ### 프롬프트 작성
 Mask 영역 채우기를 위한 이미지 복원에 Stable Diffusion 활용, 세가지 프롬프트 작성 후 실험 진행
+
 <img width="740" alt="image" src="https://github.com/user-attachments/assets/ea8d9463-1f63-44b7-92fe-980805991a1f" />
+
 ### 복원 결과
+
 <img width="593" alt="image" src="https://github.com/user-attachments/assets/cd00aeac-3c28-4050-bd2e-94db003d4573" />
 
 ## 품질 평가
 원본을 흑백으로 변환한 이미지와 결과물간의 MSE(Mean Squre Error)와 SSIM(Structural Similarity Index)을 각각 계산, 평균 내어 평가 진행
+
 <img width="408" alt="image" src="https://github.com/user-attachments/assets/32e26990-efa5-4330-a2eb-7c1c2cd6085a" />
 
 ## GAN 기반 이미지 색상화
 ### 모델 구조
+
 <img width="804" alt="image" src="https://github.com/user-attachments/assets/3db2d4cf-8614-473f-b0e0-9d3f0f24481d" />
 
 ### 복원 결과
+
 <img width="699" alt="image" src="https://github.com/user-attachments/assets/dc740226-4451-4e1a-98bc-e09893d781bc" />
 
 # 실험 결과
 ## 이미지 복원 성능 비교
 세가지 프롬프트를 사용하여 동일한 입력 이미지에 대한 복원 결과 비교했습니다. 
-MSE 기준으로는 Prompt 3이 가장 
+MSE 기준으로는 Prompt 3이 가장 우수하였지만 SSIM을 기준으로는 프롬프트 간 성능 차이가 그다지 크지 않았습니다.
+
+<img width="844" alt="image" src="https://github.com/user-attachments/assets/658d9a20-4ca9-4eed-8e6c-0eaf683dd017" />
+
+불필요한 글자나 문맥적 맥락에 어긋나는 부분들이 발생하였고, 프롬프트를 자세히 작성할수록 원하는 결과를 추출해낼 수 있다는 사실을 알 수 있었습니다. 
+
+<img width="668" alt="image" src="https://github.com/user-attachments/assets/77749889-8ba5-4bca-919c-f7c166375ce7" />
+
+
+## 이미지 색상화 성능 비교
+프롬프트 결과물 데이터를 사용하여 학습을 진행하였고, GAN의 최적화 함수는 Adam을 활용하였습니다. loss 계산은 Generatordp는 MSE를 활용하였고, Discriminator에는 BCE를 활용하였습니다.
+
+### 테스트셋에 대한 색상화 결과 Dacon 산출 점수
+<img width="387" alt="image" src="https://github.com/user-attachments/assets/25aa60fd-768b-498b-807d-f2507e5430c5" />
+
+## 색상화 결과
+<img width="435" alt="image" src="https://github.com/user-attachments/assets/97126f39-f3e8-48cd-959d-40c1fa2a97bd" />
+
+## 최종 결과
+<img width="587" alt="image" src="https://github.com/user-attachments/assets/aaf1c3f7-f36e-4458-935e-67610be69aa7" />
+
+# 결론 및 향후 계획
+
+
 
